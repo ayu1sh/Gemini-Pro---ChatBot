@@ -1,11 +1,10 @@
+
 # Import necessary libraries
-from dotenv import load_dotenv
-import os
 import streamlit as st
 import google.generativeai as gen_ai
 
-# Load environment variables
-load_dotenv()
+# Load API key from Streamlit's secret management
+GOOGLE_API_KEY = st.secrets["GOOGLE_API_KEY"]
 
 # Configure Streamlit page settings
 st.set_page_config(
@@ -13,8 +12,6 @@ st.set_page_config(
     page_icon="🤖",
     layout="centered"
 )
-
-GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 
 # Setup Google Gemini-Pro AI model
 gen_ai.configure(api_key=GOOGLE_API_KEY)
@@ -51,3 +48,4 @@ if user_prompt:
     # Display Gemini-Pro's response
     with st.chat_message("assistant"):
         st.markdown(gemini_response.text)
+
